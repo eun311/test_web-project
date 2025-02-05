@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Cesium 3D Map</title>
+
+    <!-- ✅ 최신 CesiumJS CDN 링크 추가 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cesium/1.104.0/Cesium.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cesium/1.104.0/Widgets/widgets.css">
+
+    <style>
+        html, body, #cesiumContainer {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="cesiumContainer"></div>
+
+    <script>
+        // ✅ CesiumJS가 정상적으로 로드되었는지 콘솔에서 확인
+        console.log("CesiumJS 로드됨:", typeof Cesium !== "undefined");
+
+        // ✅ Cesium Ion 토큰 설정
+        Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0MDY0ZThlNi0xZDU4LTRjMTEtYTNjNS02MzI1ODMzYzRjMGYiLCJpZCI6MjM3MzM4LCJpYXQiOjE3Mzg3Mzg1MTF9.iJuCmyJyJMRKl_L8jAPLBKxZl4s1vmS6zXOqwDZjdzc";
+
+        // ✅ Cesium Viewer 생성
+        const viewer = new Cesium.Viewer('cesiumContainer', {
+            terrainProvider: Cesium.createWorldTerrain()
+        });
+
+        // ✅ 서울 위치로 이동
+        viewer.camera.flyTo({
+            destination: Cesium.Cartesian3.fromDegrees(126.9780, 37.5665, 10000),
+            orientation: {
+                heading: Cesium.Math.toRadians(0),
+                pitch: Cesium.Math.toRadians(-45),
+                roll: 0
+            }
+        });
+    </script>
+</body>
+</html>

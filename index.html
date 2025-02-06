@@ -5,8 +5,8 @@
     <title>Cesium 3D Map</title>
 
     <!-- ✅ 최신 CesiumJS CDN 링크 추가 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cesium/1.104.0/Cesium.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cesium/1.104.0/Widgets/widgets.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cesium/1.104.0/Cesium.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cesium/1.104.0/Widgets/widgets.css">
 
     <style>
         html, body, #cesiumContainer {
@@ -42,6 +42,19 @@
                 roll: 0
             }
         });
+
+        // ✅ 현재 Cesium Viewer에서 로드된 지도(Asset ID) 찾기
+        setTimeout(() => { // 🔥 3초 후 실행 (Cesium이 다 로딩된 후 실행되도록)
+            console.log("🚀 Cesium Ion에서 로드된 지도(Asset) 확인 시작!");
+
+            viewer.scene.primitives._primitives.forEach((primitive, index) => {
+                if (primitive.resource) {
+                    console.log(`로드된 Asset ${index + 1}:`, primitive.resource);
+                } else {
+                    console.log(`로드된 Asset ${index + 1}: (자세한 정보 없음)`);
+                }
+            });
+        }, 3000); // 3초 후 실행
     </script>
 </body>
 </html>
